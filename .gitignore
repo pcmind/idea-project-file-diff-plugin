@@ -1,0 +1,11 @@
+.idea/
+*.iml
+out/
+bin/
+project-files-diff.jar
+build/
+build.properties
+.gradle
+.settings
+.classpath
+.project

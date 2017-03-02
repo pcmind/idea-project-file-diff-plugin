@@ -1,0 +1,60 @@
+plugins {
+    id 'org.jetbrains.intellij' version '0.2.1'
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaTargetVersion
+
+group pluginGroup
+version = pluginVersion
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['resources']
+        }
+    }
+}
+
+
+intellij {
+    version ideaVersion
+    type ideaType
+    pluginName pluginName
+    downloadSources Boolean.valueOf(sources)
+    sameSinceUntilBuild Boolean.valueOf(isEAP)
+    alternativeIdePath idePath
+    updateSinceUntilBuild false
+
+    plugins 'git4idea'
+
+    publishPlugin {
+        username publishUsername
+        password publishPassword
+    }
+}
+
+idea {
+    project {
+        jdkName         = javaVersion
+        languageLevel   = javaVersion
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://dl.bintray.com/jetbrains/intellij-plugin-service' }
+}
+
+
+
+dependencies {}
